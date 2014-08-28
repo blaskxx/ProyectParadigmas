@@ -7,6 +7,7 @@ package application;
  * contain only ASCII characters (without unicode processing).
  */
 
+@SuppressWarnings("all")
 public class SimpleCharStream
 {
 /** Whether parser is static. */
@@ -472,4 +473,4 @@ public class SimpleCharStream
   }
 
 }
-/* JavaCC - OriginalChecksum=d0a68af5734a31618f9a05384a8f2431 (do not edit this line) */
+/* JavaCC - OriginalChecksum=51b2e01fe9c6707b566ce0e61ef2cfa5 (do not edit this line) */

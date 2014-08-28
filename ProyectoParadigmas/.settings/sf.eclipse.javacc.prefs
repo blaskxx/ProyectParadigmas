@@ -1,6 +1,11 @@
-CLEAR_CONSOLE=false
+CLEAR_CONSOLE=true
+JAVACC_OPTIONS=
+JJDOC_OPTIONS=
+JJTREE_OPTIONS=
 JJ_NATURE=true
-RUNTIME_JJJAR=/opt/eclipse/../../home/jose/.eclipse/org.eclipse.platform_4.4.0_1473617060_linux_gtk_x86_64/plugins/sf.eclipse.javacc_1.5.27/javacc.jar
-RUNTIME_JTBJAR=/opt/eclipse/../../home/jose/.eclipse/org.eclipse.platform_4.4.0_1473617060_linux_gtk_x86_64/plugins/sf.eclipse.javacc_1.5.27/jtb-1.4.7.jar
-SUPPRESS_WARNINGS=false
+JTB_OPTIONS=
+MARK_GEN_FILES_AS_DERIVED=true
+RUNTIME_JJJAR=/opt/eclipse/../../home/alejandro/.eclipse/org.eclipse.platform_4.4.0_1473617060_linux_gtk_x86_64/plugins/sf.eclipse.javacc_1.5.27/javacc.jar
+RUNTIME_JTBJAR=/opt/eclipse/../../home/alejandro/.eclipse/org.eclipse.platform_4.4.0_1473617060_linux_gtk_x86_64/plugins/sf.eclipse.javacc_1.5.27/jtb-1.4.7.jar
+SUPPRESS_WARNINGS=true
 eclipse.preferences.version=1

@@ -11,6 +11,7 @@ package application;
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the public fields.
  */
+@SuppressWarnings("all")
 public class ParseException extends Exception {
 
   /**
@@ -184,4 +185,4 @@ public class ParseException extends Exception {
    }
 
 }
-/* JavaCC - OriginalChecksum=4a9f6ac3b873fa4904e068a8a5f3dac6 (do not edit this line) */
+/* JavaCC - OriginalChecksum=f6ad140e32f5bdbdf8c85bc0c2552d6e (do not edit this line) */

@@ -1,0 +1,59 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.5";  static = true;}PARSER_BEGIN(EG1)package application;
+
+public class EG1{  public static void main( String[] args )throws ParseException
+	{
+		try
+		{
+			EG1 analizador = new EG1( System.in ) ;
+			analizador.Sentencia() ; 
+		}
+		catch(ParseException e)
+		{
+			System.out.println(e.getMessage());
+			System.out.println("Analizador: Se han encontrado errores en el analisis.");
+		}
+	}}PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}
+TOKEN : /* PALABRAS RESERVADAS */
+{
+  < create : "CREATE" >
+| < object : "OBJECT" >
+}
+TOKEN: 
+{
+	  <TIPO   :"int"|"bool"|"string">
+	| <NUMERO : (["0"-"9"])+ >
+	| <IDENTIFICADOR : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*> 
+	| <CADENA : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>
+}
+TOKEN : /* SIMBOLOS */
+{
+  < INITSIMBOL : "(" >
+| < FINSIMBOL   : ")" >
+| < FLINEA     : ";" >
+}
+
+void Sentencia() :
+{}
+{
+	<create><object><IDENTIFICADOR><INITSIMBOL>Parametros()<FINSIMBOL><FLINEA ><EOF>
+	
+}
+void Parametros():
+{}
+{
+	UNPARAMETRO() 	
+//DeclaracionGlobal() | Principal()
+}
+void UNPARAMETRO():
+{}
+{
+	<IDENTIFICADOR><TIPO>	
+}
+
+void DOSPARAMETROS():
+{}
+{
+	<IDENTIFICADOR><TIPO><IDENTIFICADOR><TIPO>
+}

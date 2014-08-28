@@ -3,6 +3,7 @@
 package application;
 
 /** Token Manager Error. */
+@SuppressWarnings("all")
 public class TokenMgrError extends Error
 {
 
@@ -144,4 +145,4 @@ public class TokenMgrError extends Error
     this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
   }
 }
-/* JavaCC - OriginalChecksum=4efab0484498973cf8d84e1f93b24f59 (do not edit this line) */
+/* JavaCC - OriginalChecksum=c8144ae481c23a659f3cbfd575e6a6dc (do not edit this line) */

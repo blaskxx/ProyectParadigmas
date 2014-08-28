@@ -6,6 +6,7 @@ package application;
  * Describes the input token stream.
  */
 
+@SuppressWarnings("all")
 public class Token implements java.io.Serializable {
 
   /**
@@ -128,4 +129,4 @@ public class Token implements java.io.Serializable {
   }
 
 }
-/* JavaCC - OriginalChecksum=cc894216135ee8d3d8dd6026dcf3c8e1 (do not edit this line) */
+/* JavaCC - OriginalChecksum=dcafb4f296a9d2452dbb4def984831c7 (do not edit this line) */
