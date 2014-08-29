@@ -9,6 +9,9 @@ public class EG1 implements EG1Constants {
                 {
                         EG1 analizador = new EG1( System.in ) ;
                         analizador.Sentencia() ;
+                        System.out.println("Analizador: Exitoso.");
+
+
                 }
                 catch(ParseException e)
                 {
@@ -18,10 +21,25 @@ public class EG1 implements EG1Constants {
         }
 
   static final public void Sentencia() throws ParseException {
+    Create1();
+  }
+
+  static final public void Create1() throws ParseException {
     jj_consume_token(create);
     jj_consume_token(object);
     jj_consume_token(IDENTIFICADOR);
     jj_consume_token(INITSIMBOL);
+    Parametros();
+    jj_consume_token(FINSIMBOL);
+    jj_consume_token(FLINEA);
+  }
+
+  static final public void Create2() throws ParseException {
+    jj_consume_token(create);
+    jj_consume_token(object);
+    jj_consume_token(IDENTIFICADOR);
+    jj_consume_token(INITSIMBOL);
+    Parametros();
     Parametros();
     jj_consume_token(FINSIMBOL);
     jj_consume_token(FLINEA);

@@ -7,7 +7,10 @@ public class EG1{  public static void main( String[] args )throws ParseExcepti
 		try
 		{
 			EG1 analizador = new EG1( System.in ) ;
-			analizador.Sentencia() ; 
+			analizador.Sentencia() ;
+			System.out.println("Analizador: Exitoso.");
+		
+			
 		}
 		catch(ParseException e)
 		{
@@ -37,7 +40,18 @@ TOKEN : /* SIMBOLOS */
 void Sentencia() :
 {}
 {
-	<create><object><IDENTIFICADOR><INITSIMBOL>Parametros()<FINSIMBOL><FLINEA ><EOF>
+	Create1() 
+}
+
+void Create1() :
+{}
+{
+  <create><object><IDENTIFICADOR><INITSIMBOL>Parametros()<FINSIMBOL><FLINEA >
+	}
+void Create2() :
+{}
+{
+  <create><object><IDENTIFICADOR><INITSIMBOL>Parametros()Parametros()<FINSIMBOL><FLINEA ><EOF>
 	
 }
 void Parametros():
