@@ -1,6 +1,6 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */options{  JDK_VERSION = "1.5";  static = true;}PARSER_BEGIN(EG1)package application;
+ */options{  JDK_VERSION = "1.8";  static = true;}PARSER_BEGIN(EG1)package application;
 
 public class EG1{  public static void main( String[] args )throws ParseException
 	{
@@ -8,7 +8,7 @@ public class EG1{  public static void main( String[] args )throws ParseExcepti
 		{
 			EG1 analizador = new EG1( System.in ) ;
 			analizador.Sentencia() ;
-			System.out.println("Analizador: Exitoso.");
+			System.out.println("Analizador: Exitoso :).");
 		
 			
 		}
