@@ -4,70 +4,118 @@
 
 public class EG1{  public static void main( String[] args )throws ParseException
 	{
-		try
-		{
-			EG1 analizador = new EG1( System.in ) ;
-			analizador.Sentencia() ;
-			System.out.println("Analizador: Exitoso.");
-		
-			
-		}
-		catch(ParseException e)
-		{
-			System.out.println(e.getMessage());
-			System.out.println("Analizador: Se han encontrado errores en el analisis.");
-		}
+	  EG1 parser = new EG1( System.in ) ;
+	  while (true)
+	  {	   	System.out.print("Enter an expression: ");
+			try
+			{
+			  switch (EG1.Sentence())
+	       	  {
+	          case 0 :	
+	          System.out.println("Parser: Successful.");
+	          break;
+	          
+	          case 1 : 
+	          System.out.println("Empty expression, please enter a new one:");
+	          break;
+	          
+	          default : 
+	          break;
+	          }	
+			}
+			catch(ParseException e)
+			{
+				System.out.println(e.getMessage());
+				System.out.println("Parser: Errors have been found.");
+				break;
+			}
+		}	
 	}}PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}
-TOKEN : /* PALABRAS RESERVADAS */
+TOKEN : /* RESERVED WORDS */
 {
   < create : "CREATE" >
 | < object : "OBJECT" >
+| < insert : "INSERT" >
+| < select : "SELECT" >
+| < from   : "FROM"   > 
 }
 TOKEN: 
 {
-	  <TIPO   :"int"|"bool"|"string">
-	| <NUMERO : (["0"-"9"])+ >
-	| <IDENTIFICADOR : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*> 
-	| <CADENA : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>
+	  <TYPE   :"int"|"bool"|"string">
+	| <NUMBER : (["0"-"9"])+ >
+	| <IDENTIFIER : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*> 
+	| <STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>
 }
-TOKEN : /* SIMBOLOS */
+TOKEN : /* SYMBOL */
 {
-  < INITSIMBOL : "(" >
-| < FINSIMBOL   : ")" >
-| < FLINEA     : ";" >
+  < INITSIMBOL  : "(" >
+| < ENDSIMBOL   : ")" >
+| < ENDLINE     : ";" >
+| < COMMA       : ",">
 }
 
-void Sentencia() :
+int Sentence() :
 {}
 {
-	Create1() 
+	Create1() 	{		return 0;
+	}
+   /*|Create2() 
+	{
+		return 0;
+	}*/ 	
+   |Insert()
+    {
+       	return 0;    }
+   |Select()
+   {
+     	return 0;   } 
+   |<ENDLINE>
+    {
+      	return 1;    }
 }
 
 void Create1() :
 {}
 {
-  <create><object><IDENTIFICADOR><INITSIMBOL>Parametros()<FINSIMBOL><FLINEA >
+  <create><object><IDENTIFIER><INITSIMBOL>Parameters()<ENDSIMBOL><ENDLINE>
 	}
-void Create2() :
+void Create2():
 {}
 {
-  <create><object><IDENTIFICADOR><INITSIMBOL>Parametros()Parametros()<FINSIMBOL><FLINEA ><EOF>
+  <create><object><from><INITSIMBOL>Parameters()<COMMA>Parameters()<ENDSIMBOL><ENDLINE>
 	
 }
-void Parametros():
+void Insert():
 {}
 {
-	UNPARAMETRO() 	
-//DeclaracionGlobal() | Principal()
+  <insert><IDENTIFIER><INITSIMBOL>ParamameterValue()<COMMA>ParamameterValue()<ENDSIMBOL><ENDLINE>
+	
 }
-void UNPARAMETRO():
+void Select():
 {}
 {
-	<IDENTIFICADOR><TIPO>	
+  <select><IDENTIFIER><COMMA><IDENTIFIER><from><IDENTIFIER><ENDLINE>
+	
+}
+void Parameters():
+{}
+{
+	oneParamameter() 	
+//globalDeclaration() | Principal()
+}
+void oneParamameter():
+{}
+{
+	<IDENTIFIER><TYPE>	
+}
+void ParamameterValue():
+{}
+{
+	<IDENTIFIER>	
 }
 
-void DOSPARAMETROS():
+void twoParamameters():
 {}
 {
-	<IDENTIFICADOR><TIPO><IDENTIFICADOR><TIPO>
+	<IDENTIFIER><TYPE><IDENTIFIER><TYPE>
 }
