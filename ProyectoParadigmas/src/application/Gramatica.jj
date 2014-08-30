@@ -8,7 +8,7 @@ public class EG1{  public static void main( String[] args )throws ParseExcepti
 		{
 			EG1 analizador = new EG1( System.in ) ;
 			analizador.Sentencia() ;
-			System.out.println("Analizador: Exitoso :).");
+			System.out.println("Analizador: Exitoso.");
 		
 			
 		}
