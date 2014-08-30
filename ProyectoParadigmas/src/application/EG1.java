@@ -5,61 +5,124 @@ package application;
 public class EG1 implements EG1Constants {
   public static void main( String[] args )throws ParseException
         {
-                try
-                {
-                        EG1 analizador = new EG1( System.in ) ;
-                        analizador.Sentencia() ;
-                        System.out.println("Analizador: Exitoso.");
+          EG1 parser = new EG1( System.in ) ;
+          while (true)
+          {
+            System.out.print("Live Happy :D ");
+                System.out.print("Enter an expression: ");
 
+                        try
+                        {
+                          switch (EG1.Sentence())
+                  {
+                  case 0 :
+                  System.out.println("Parser: Successful.");
+                  break;
 
-                }
-                catch(ParseException e)
-                {
-                        System.out.println(e.getMessage());
-                        System.out.println("Analizador: Se han encontrado errores en el analisis.");
+                  case 1 :
+                  System.out.println("Empty expression, please enter a new one:");
+                  break;
+
+                  default :
+                  break;
+                  }
+                        }
+                        catch(ParseException e)
+                        {
+                                System.out.println(e.getMessage());
+                                System.out.println("Parser: Errors have been found.");
+                                break;
+                        }
                 }
         }
 
-  static final public void Sentencia() throws ParseException {
-    Create1();
+  static final public int Sentence() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case create:
+      Create1();
+                {if (true) return 0;}
+      break;
+    case insert:
+      Insert();
+        {if (true) return 0;}
+      break;
+    case select:
+      Select();
+        {if (true) return 0;}
+      break;
+    case ENDLINE:
+      jj_consume_token(ENDLINE);
+        {if (true) return 1;}
+      break;
+    default:
+      jj_la1[0] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
   }
 
   static final public void Create1() throws ParseException {
     jj_consume_token(create);
     jj_consume_token(object);
-    jj_consume_token(IDENTIFICADOR);
+    jj_consume_token(IDENTIFIER);
     jj_consume_token(INITSIMBOL);
-    Parametros();
-    jj_consume_token(FINSIMBOL);
-    jj_consume_token(FLINEA);
+    Parameters();
+    jj_consume_token(ENDSIMBOL);
+    jj_consume_token(ENDLINE);
   }
 
   static final public void Create2() throws ParseException {
     jj_consume_token(create);
     jj_consume_token(object);
-    jj_consume_token(IDENTIFICADOR);
+    jj_consume_token(from);
     jj_consume_token(INITSIMBOL);
-    Parametros();
-    Parametros();
-    jj_consume_token(FINSIMBOL);
-    jj_consume_token(FLINEA);
-    jj_consume_token(0);
+    Parameters();
+    jj_consume_token(COMMA);
+    Parameters();
+    jj_consume_token(ENDSIMBOL);
+    jj_consume_token(ENDLINE);
   }
 
-  static final public void Parametros() throws ParseException {
-    UNPARAMETRO();
+  static final public void Insert() throws ParseException {
+    jj_consume_token(insert);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(INITSIMBOL);
+    ParamameterValue();
+    jj_consume_token(COMMA);
+    ParamameterValue();
+    jj_consume_token(ENDSIMBOL);
+    jj_consume_token(ENDLINE);
   }
 
-  static final public void UNPARAMETRO() throws ParseException {
-    jj_consume_token(IDENTIFICADOR);
-    jj_consume_token(TIPO);
+  static final public void Select() throws ParseException {
+    jj_consume_token(select);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(COMMA);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(from);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(ENDLINE);
   }
 
-  static final public void DOSPARAMETROS() throws ParseException {
-    jj_consume_token(IDENTIFICADOR);
-    jj_consume_token(TIPO);
-    jj_consume_token(IDENTIFICADOR);
-    jj_consume_token(TIPO);
+  static final public void Parameters() throws ParseException {
+    oneParamameter();
+  }
+
+  static final public void oneParamameter() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(TYPE);
+  }
+
+  static final public void ParamameterValue() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+  }
+
+  static final public void twoParamameters() throws ParseException {
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(TYPE);
+    jj_consume_token(IDENTIFIER);
+    jj_consume_token(TYPE);
   }
 
   static private boolean jj_initialized_once = false;
@@ -72,13 +135,13 @@ public class EG1 implements EG1Constants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[0];
+  static final private int[] jj_la1 = new int[1];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {};
+      jj_la1_0 = new int[] {0x101a0,};
    }
 
   /** Constructor with InputStream. */
@@ -99,7 +162,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -113,7 +176,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -130,7 +193,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -140,7 +203,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -156,7 +219,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -165,7 +228,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 0; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -216,12 +279,12 @@ public class EG1 implements EG1Constants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[14];
+    boolean[] la1tokens = new boolean[18];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < 1; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -230,7 +293,7 @@ public class EG1 implements EG1Constants {
         }
       }
     }
-    for (int i = 0; i < 14; i++) {
+    for (int i = 0; i < 18; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

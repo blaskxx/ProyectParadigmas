@@ -6,7 +6,9 @@ public class EG1{  public static void main( String[] args )throws ParseExcepti
 	{
 	  EG1 parser = new EG1( System.in ) ;
 	  while (true)
-	  {	   	System.out.print("Enter an expression: ");
+	  {
+	    System.out.print("Live Happy :D ");	   	System.out.print("Enter an expression: ");
+	   
 			try
 			{
 			  switch (EG1.Sentence())

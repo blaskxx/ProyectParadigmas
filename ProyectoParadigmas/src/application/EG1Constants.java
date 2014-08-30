@@ -16,19 +16,27 @@ public interface EG1Constants {
   /** RegularExpression Id. */
   int object = 6;
   /** RegularExpression Id. */
-  int TIPO = 7;
+  int insert = 7;
   /** RegularExpression Id. */
-  int NUMERO = 8;
+  int select = 8;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 9;
+  int from = 9;
   /** RegularExpression Id. */
-  int CADENA = 10;
+  int TYPE = 10;
   /** RegularExpression Id. */
-  int INITSIMBOL = 11;
+  int NUMBER = 11;
   /** RegularExpression Id. */
-  int FINSIMBOL = 12;
+  int IDENTIFIER = 12;
   /** RegularExpression Id. */
-  int FLINEA = 13;
+  int STRING = 13;
+  /** RegularExpression Id. */
+  int INITSIMBOL = 14;
+  /** RegularExpression Id. */
+  int ENDSIMBOL = 15;
+  /** RegularExpression Id. */
+  int ENDLINE = 16;
+  /** RegularExpression Id. */
+  int COMMA = 17;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -42,13 +50,17 @@ public interface EG1Constants {
     "\"\\n\"",
     "\"CREATE\"",
     "\"OBJECT\"",
-    "<TIPO>",
-    "<NUMERO>",
-    "<IDENTIFICADOR>",
-    "<CADENA>",
+    "\"INSERT\"",
+    "\"SELECT\"",
+    "\"FROM\"",
+    "<TYPE>",
+    "<NUMBER>",
+    "<IDENTIFIER>",
+    "<STRING>",
     "\"(\"",
     "\")\"",
     "\";\"",
+    "\",\"",
   };
 
 }
