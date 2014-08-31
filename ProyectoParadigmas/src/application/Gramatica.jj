@@ -59,12 +59,9 @@ TOKEN : /* SYMBOL */
 int Sentence() :
 {}
 {
-	Create1() 	{		return 0;
+	Create() 	{		return 0;
 	}
-   /*|Create2() 
-	{
-		return 0;
-	}*/ 	
+    	
    |Insert()
     {
        	return 0;    }
@@ -75,18 +72,33 @@ TOKEN : /* SYMBOL */
     {
       	return 1;    }
 }
-
-void Create1() :
+// When there is more than one parameter we must create more
+// branches in order to create the syntax
+void Create() : 
 {}
 {
-  <create><object><IDENTIFIER><INITSIMBOL>Parameters()<ENDSIMBOL><ENDLINE>
+  BeginCreate()oneParamameter()EndCreate()
 	}
-void Create2():
+void BeginCreate():
 {}
 {
-  <create><object><from><INITSIMBOL>Parameters()<COMMA>Parameters()<ENDSIMBOL><ENDLINE>
-	
+  <create><object><IDENTIFIER><INITSIMBOL>}
+void EndCreate():
+{}
+{
+  <ENDSIMBOL><ENDLINE>
+  |<COMMA>Parameters()finalCreate()
 }
+// FinalCreate works as a break cuz if it does not exist
+// we could get a loop in witch will be admit more than two parameters
+
+ void finalCreate():
+{}
+{
+  <ENDSIMBOL><ENDLINE>
+  
+}
+
 void Insert():
 {}
 {
@@ -99,6 +111,7 @@ void Select():
   <select><IDENTIFIER><COMMA><IDENTIFIER><from><IDENTIFIER><ENDLINE>
 	
 }
+
 void Parameters():
 {}
 {
