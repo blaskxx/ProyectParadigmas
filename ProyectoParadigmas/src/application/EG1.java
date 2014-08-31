@@ -39,7 +39,7 @@ public class EG1 implements EG1Constants {
   static final public int Sentence() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case create:
-      Create1();
+      Create();
                 {if (true) return 0;}
       break;
     case insert:
@@ -62,24 +62,42 @@ public class EG1 implements EG1Constants {
     throw new Error("Missing return statement in function");
   }
 
-  static final public void Create1() throws ParseException {
+// When there is more than one parameter we must create more
+// branches in order to create the syntax
+  static final public void Create() throws ParseException {
+    BeginCreate();
+    oneParamameter();
+    EndCreate();
+  }
+
+  static final public void BeginCreate() throws ParseException {
     jj_consume_token(create);
     jj_consume_token(object);
     jj_consume_token(IDENTIFIER);
     jj_consume_token(INITSIMBOL);
-    Parameters();
-    jj_consume_token(ENDSIMBOL);
-    jj_consume_token(ENDLINE);
   }
 
-  static final public void Create2() throws ParseException {
-    jj_consume_token(create);
-    jj_consume_token(object);
-    jj_consume_token(from);
-    jj_consume_token(INITSIMBOL);
-    Parameters();
-    jj_consume_token(COMMA);
-    Parameters();
+  static final public void EndCreate() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ENDSIMBOL:
+      jj_consume_token(ENDSIMBOL);
+      jj_consume_token(ENDLINE);
+      break;
+    case COMMA:
+      jj_consume_token(COMMA);
+      Parameters();
+      finalCreate();
+      break;
+    default:
+      jj_la1[1] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+// FinalCreate works as a break cuz if it does not exist
+// we could get a loop in witch will be admit more than two parameters
+  static final public void finalCreate() throws ParseException {
     jj_consume_token(ENDSIMBOL);
     jj_consume_token(ENDLINE);
   }
@@ -135,13 +153,13 @@ public class EG1 implements EG1Constants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[1];
+  static final private int[] jj_la1 = new int[2];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x101a0,};
+      jj_la1_0 = new int[] {0x101a0,0x28000,};
    }
 
   /** Constructor with InputStream. */
@@ -162,7 +180,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -176,7 +194,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -193,7 +211,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -203,7 +221,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -219,7 +237,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -228,7 +246,7 @@ public class EG1 implements EG1Constants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -284,7 +302,7 @@ public class EG1 implements EG1Constants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
