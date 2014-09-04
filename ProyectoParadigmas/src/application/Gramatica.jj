@@ -120,7 +120,7 @@ class Object{  String objectName;
   public String toString()  {
 	    StringBuilder sb= new StringBuilder();
 	    sb.append("Name-"+objectName+" ");
-	    if(name[0]!=null&&type[0]=="int")
+	    if(name[0]!=null&&(type[0]=="int"||type[0]!=null))
 		{
 			sb.append(type[0]+" "+name[0]+"=");
 		    if(number[1]!=null)
@@ -131,7 +131,7 @@ class Object{  String objectName;
 		      sb.append("null; ");
 		    }
 	  }
-		if(name[1]!=null&&type[1]=="int")
+		if(name[1]!=null&&(type[1]=="int"||type[1]!=null))
 		{
 			sb.append(type[1]+" "+name[1]+"=");
 		    if(number[1]!=null)
@@ -141,7 +141,7 @@ class Object{  String objectName;
 		      sb.append("null; ");
 		    }
 	  }	  
-	    if(name[0]!=null&&type[0]=="string")
+	    if(name[0]!=null&&(type[0]=="string"||type[0]!=null))
 		{
 		    sb.append(type[0]+" "+name[0]+"=");
 		  
@@ -155,7 +155,7 @@ class Object{  String objectName;
 	  }
 
 
-	    if(name[1]!=null&&type[1]=="string")
+	    if(name[1]!=null&&(type[1]=="string"||type[1]!=null))
 		{
 		    sb.append(type[1]+" "+name[1]+"=");
 		  
@@ -164,7 +164,7 @@ class Object{  String objectName;
 		      sb.append(characters[1]+"; ");
 		    }else		    {
 		      sb.append("null; ");		    }	  }	  
-		if(name[0]!=null&&type[0]=="boolean")
+		if(name[0]!=null&&(type[0]=="boolean"||type[1]!=null))
 		{
 		  sb.append(type[0]+" "+name[0]+"=");
 		  
@@ -176,7 +176,7 @@ class Object{  String objectName;
 		      sb.append("null; ");
 		    }	  	}	  
 	    
-		if(name[1]!=null&&type[1]=="boolean")		{		  sb.append("boolean "+name[1]+"=");
+		if(name[1]!=null&&(type[1]=="boolean"||type[1]!=null))		{		  sb.append("boolean "+name[1]+"=");
 			if(booleans[1]!=null)
 		    {
 		      sb.append(booleans[1]+"; ");
