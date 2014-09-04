@@ -1,136 +1,241 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */options{  JDK_VERSION = "1.8";  static = true;}PARSER_BEGIN(EG1)package application;
+ */options{  JDK_VERSION = "1.8";  static = true;  COMMON_TOKEN_ACTION = false;  TOKEN_MANAGER_USES_PARSER = true;}PARSER_BEGIN(EG1)package application;import java.util.ArrayList;import java.lang.StringBuilder;public class EG1{  public static void main(String [] args) throws ParseException  {    EG1 parser = new EG1(System.in);    while (true)    {      System.out.print("Live Happy :D \n");      System.out.print("Enter an expression: ");      try      {        switch (EG1.Sentence())        {          case 0 : System.out.println("Parser: Successful.");          //EG1.DoAction();
+          break;          case 1 : System.out.println("Empty expression, please enter a new one:");          break;          default : break;        }      }      catch (ParseException e)      {        System.out.println(e.getMessage());        System.out.println("Parser: Errors have been found.");        break;      }    }  }}//====================================================================================================================================
+//class object is like an template class
+class Object{  String objectName;
+  String name[];//name of the object
+  String type[];//type of the object
+    Integer [] number;  String [] characters;  Boolean [] booleans;
 
-public class EG1{  public static void main( String[] args )throws ParseException
-	{
-	  EG1 parser = new EG1( System.in ) ;
-	  while (true)
-	  {
-	    System.out.print("Live Happy :D ");	   	System.out.print("Enter an expression: ");
-	   
-			try
-			{
-			  switch (EG1.Sentence())
-	       	  {
-	          case 0 :	
-	          System.out.println("Parser: Successful.");
-	          break;
-	          
-	          case 1 : 
-	          System.out.println("Empty expression, please enter a new one:");
-	          break;
-	          
-	          default : 
-	          break;
-	          }	
-			}
-			catch(ParseException e)
-			{
-				System.out.println(e.getMessage());
-				System.out.println("Parser: Errors have been found.");
-				break;
-			}
-		}	
-	}}PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}
-TOKEN : /* RESERVED WORDS */
-{
-  < create : "CREATE" >
-| < object : "OBJECT" >
-| < insert : "INSERT" >
-| < select : "SELECT" >
-| < from   : "FROM"   > 
-}
-TOKEN: 
-{
-	  <TYPE   :"int"|"bool"|"string">
-	| <NUMBER : (["0"-"9"])+ >
-	| <IDENTIFIER : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*> 
-	| <STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>
-}
-TOKEN : /* SYMBOL */
-{
-  < INITSIMBOL  : "(" >
-| < ENDSIMBOL   : ")" >
-| < ENDLINE     : ";" >
-| < COMMA       : ",">
-}
-
-int Sentence() :
-{}
-{
-	Create() 	{		return 0;
-	}
+  //CONTRUCTORS*************************************************************************************	//this constructor try to convert the types of the class object and it is validate it.
+	public Object(String objectName,String value,String type)	{
+	  this.objectName =objectName;
+	  
+    	this.name=new String[2];
+    	this.type=new String[2];
     	
-   |Insert()
-    {
-       	return 0;    }
-   |Select()
-   {
-     	return 0;   } 
-   |<ENDLINE>
-    {
-      	return 1;    }
-}
-// When there is more than one parameter we must create more
-// branches in order to create the syntax
-void Create() : 
-{}
-{
-  BeginCreate()oneParamameter()EndCreate()
-	}
-void BeginCreate():
-{}
-{
-  <create><object><IDENTIFIER><INITSIMBOL>}
-void EndCreate():
-{}
-{
-  <ENDSIMBOL><ENDLINE>
-  |<COMMA>Parameters()finalCreate()
-}
-// FinalCreate works as a break cuz if it does not exist
-// we could get a loop in witch will be admit more than two parameters
+	  try
+	  {
+	    	this.name[0]=value;
+	    	this.type[0]=type;
+			  if(type=="int")
+			  {
+			   	number = new Integer [2];
+			  }else if(type=="string"){
+			  	characters = new String [2];
+			  
+			  }else if(type=="bool"){
+			    booleans = new Boolean [2];
+			  }
+			  
+			  
+		}catch(Exception e)
+		{
+		  System.out.println("Error: "+e.toString());
+		}	}
 
- void finalCreate():
-{}
-{
-  <ENDSIMBOL><ENDLINE>
+	//this constructor try to convert the types of the class object and it is validate it.
+	public Object(String objectName,String value1,String type1,String value2,String type2)
+	{
+		this.objectName =objectName;
+		this.name=new String[2];
+    	this.type=new String[2];
+		
+    	
+    	
+    	booleans = new Boolean [2];
+	  try	  {
+	    	//set the types and names
+	    	this.name[0]=value1;
+    		this.type[0]=type1;
+    		this.name[1]=value2;
+    		this.type[1]=type2;
+    		//and then inicialize the variables who the object will need.
+			  if(type1=="int")			  {
+			    number = new Integer [2];
+			     			  }else if(type1=="string"){
+			    
+			  	characters = new String [2];			  			  }else if(type1=="bool"){
+			    
+			    booleans = new Boolean [2];			  }
+			  if(type2=="int")
+			  {
+			    
+			    number = new Integer [2];
+			    
+			  }else if(type2=="string"){
+			  	characters = new String [2];
+			  
+			  }else if(type2=="bool"){
+			    booleans = new Boolean [2];
+			  }
+			  		}catch(Exception e)		{
+		  System.out.println("Error: "+e.toString());		}	
+	}  public Object()  {
+  	type = new String[2];
+  	name = new String[2];    objectName = "";    number = new Integer [2];    characters = new String [2];    booleans = new Boolean [2];  }
+//END CONSTRUCTORS**************************************************************************
+	public String[] getName()
+	{
+	  return name;
+	}
+	public void setName(String[] name)
+	{
+	  this.name=name;
+	}
+
+	public String[] getType()
+	{
+	  return type;
+	}
+	public void setType(String[] type)
+	{
+	  this.type=type;
+	}
+
+	public String[] getCharacters()	{
+	  return characters;	}
+	public void setCharacters(String[] characters)	{
+	  this.characters=characters;	}
+
+	public Integer[] getNumber()
+	{
+	  return number;
+	}
+	public void setNumber(Integer[] number)
+	{
+	  this.number=number;
+	}
+	public Boolean[] getBooleans()
+	{
+	  return booleans;
+	}
+	public void setBooleans(Boolean[] booleans)
+	{
+	  this.booleans=booleans;
+	}
+	
   
-}
+  public String toString()  {
+	    StringBuilder sb= new StringBuilder();
+	    sb.append("Name-"+objectName+" ");
+	    if(name[0]!=null&&type[0]=="int")
+		{
+			sb.append(type[0]+" "+name[0]+"=");
+		    if(number[1]!=null)
+		    {
+		      sb.append(number[0]+"; ");
+		  	}else
+		    {
+		      sb.append("null; ");
+		    }
+	  }
+		if(name[1]!=null&&type[1]=="int")
+		{
+			sb.append(type[1]+" "+name[1]+"=");
+		    if(number[1]!=null)
+		    {
+		      sb.append(number[1]+"; ");		  	}else
+		    {
+		      sb.append("null; ");
+		    }
+	  }	  
+	    if(name[0]!=null&&type[0]=="string")
+		{
+		    sb.append(type[0]+" "+name[0]+"=");
+		  
+		    if(characters[0]!=null || !characters[0].isEmpty())
+		    {
+		      sb.append(characters[0]+"; ");
+		    }else
+		    {
+		      sb.append("null; ");
+		    }
+	  }
 
-void Insert():
-{}
-{
-  <insert><IDENTIFIER><INITSIMBOL>ParamameterValue()<COMMA>ParamameterValue()<ENDSIMBOL><ENDLINE>
+
+	    if(name[1]!=null&&type[1]=="string")
+		{
+		    sb.append(type[1]+" "+name[1]+"=");
+		  
+		    if(characters[1]!=null || !characters[1].isEmpty())
+		    {
+		      sb.append(characters[1]+"; ");
+		    }else		    {
+		      sb.append("null; ");		    }	  }	  
+		if(name[0]!=null&&type[0]=="boolean")
+		{
+		  sb.append(type[0]+" "+name[0]+"=");
+		  
+			if(booleans[0]!=null)
+		    {
+		      sb.append(booleans[0]+"; ");
+		    }else
+		    {
+		      sb.append("null; ");
+		    }	  	}	  
+	    
+		if(name[1]!=null&&type[1]=="boolean")		{		  sb.append("boolean "+name[1]+"=");
+			if(booleans[1]!=null)
+		    {
+		      sb.append(booleans[1]+"; ");
+		    }else		    {
+		      sb.append("null; ");		    }	  	}	  
+    
+		return sb.toString();  }}//====================================================================================================================================
+//the Object container
+class ObjectContainer{  ArrayList < Object > list;  public ObjectContainer()  {    list = new ArrayList < Object > ();  }  //this will print all the container
+  public String printObject()  {    StringBuilder sb = new StringBuilder();    for (Object o : list)    {      sb.append(o.toString());    }    return sb.toString();  }  //this will create a new object with 2 parameter and insert it, on the list.
+	public boolean insertNewObjectBothParams(String nameObject,String sentence, String type,String sentence2,String type2)	{
+	  		try	  		{
+				Object newObject = new Object(nameObject,sentence,type,sentence2,type2);
+		  		list.add(newObject);
+		  		return true;
+	  }catch(Exception e)	  {
+	    System.out.println("Error to create new object...");	  }		return false;	}
+
 	
-}
-void Select():
-{}
-{
-  <select><IDENTIFIER><COMMA><IDENTIFIER><from><IDENTIFIER><ENDLINE>
-	
-}
-
-void Parameters():
-{}
-{
-	oneParamameter() 	
-//globalDeclaration() | Principal()
-}
-void oneParamameter():
-{}
-{
-	<IDENTIFIER><TYPE>	
-}
-void ParamameterValue():
-{}
-{
-	<IDENTIFIER>	
-}
-
-void twoParamameters():
-{}
-{
-	<IDENTIFIER><TYPE><IDENTIFIER><TYPE>
-}
+	//this will create a new object with 1 parameter and insert it, on the list.
+	public boolean insertNewObjectSingleParams(String nameObject,String sentence, String type)
+	{
+	  		try
+	  		{
+	  		  
+			Object newObject = new Object(nameObject,sentence,type);
+	  		list.add(newObject);
+	  		return true;
+		  }catch(Exception e)
+		  {
+		    System.out.println("Error to create new object...");
+		  }
+		return false;
+	}
+		//assign values to the object with a single parameter
+	public boolean modifyParameterSingleParameter(String objectName,String Sentence)	{
+	  try	  {	    
+		//list.get(objectName).setParameter(Sentence);
+		return true;
+	  }catch(Exception e)	  {
+	    System.out.println("Error to assign Parameter");	  }
+	  return false;	}
+	//assign values to Both parameters
+	public boolean modifyParameterBothParameter(String objectName,String Sentence)
+	{
+	  try
+	  {
+	    
+		//list.get(objectName).setParameter(Sentence);
+		return true;
+	  }catch(Exception e)
+	  {
+	    System.out.println("Error to assign Parameter");
+	  }
+	  return false;
+	}
+}PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* RESERVED WORDS */{  < create : "CREATE" >| < object : "OBJECT" >| < insert : "INSERT" >| < select : "SELECT" >| < from : "FROM" >}TOKEN :{  < TYPE :    "int"  | "bool"  | "string" >| < NUMBER : ([ "0"-"9" ])+ >| < IDENTIFIER : [ "a"-"z", "A"-"Z" ] ([ "a"-"z", "A"-"Z", "0"-"9", "_" ])* >| < STRING : [ "a"-"z", "A"-"Z", "0"-"9" ] ([ "a"-"z", "A"-"Z", "0"-"9" ])* >}TOKEN : /* SYMBOL */{  < INITSIMBOL : "(" >| < ENDSIMBOL : ")" >| < ENDLINE : ";" >| < COMMA : "," >}boolean DoAction() :{}{  Create()  {    return true;  }| Insert()  {    return true;  }  Select()  {    return true;  }| < ENDLINE >  {    return false;  }}int Sentence() :{}{  Create()  {    return 0;  }| Insert()  {    return 0;  }| Select()  {    return 0;  }| < ENDLINE >  {    return 1;  }}// When there is more than one parameter we must create more
+// branches in order to create the syntax
+void Create() :{}{  BeginCreate() oneParamameter() EndCreate()  {}}void BeginCreate() :{}{  < create > < object > < IDENTIFIER > < INITSIMBOL >}void EndCreate() :{}{  < ENDSIMBOL > < ENDLINE >| < COMMA > Parameters() finalCreate()}// FinalCreate works as a break cuz if it does not exist
+// we could get a loop in witch will be admit more than two parameters
+void finalCreate() :{}{  < ENDSIMBOL > < ENDLINE >}void Insert() :{}{  < insert > < IDENTIFIER > < INITSIMBOL > ParamameterValue() < COMMA > ParamameterValue() < ENDSIMBOL > < ENDLINE >}void Select() :{}{  < select > < IDENTIFIER > < COMMA > < IDENTIFIER > < from > < IDENTIFIER > < ENDLINE >}void Parameters() :{}{  oneParamameter()  //globalDeclaration() | Principal()
+}void oneParamameter() :{}{  < IDENTIFIER > < TYPE >}void ParamameterValue() :{}{  < IDENTIFIER >|< NUMBER >}void twoParamameters() :{}{  < IDENTIFIER > < TYPE > < IDENTIFIER > < TYPE >}
