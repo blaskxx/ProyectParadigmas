@@ -1,8 +1,34 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
  */options{  JDK_VERSION = "1.8";  static = true;  COMMON_TOKEN_ACTION = false;  TOKEN_MANAGER_USES_PARSER = true;}PARSER_BEGIN(EG1)package application;import java.util.HashMap;import java.lang.StringBuilder;
-import java.util.Iterator;public class EG1{  public static void main(String [] args) throws ParseException  {    EG1 parser = new EG1(System.in);    while (true)    {      System.out.print("Live Happy :D \n");      System.out.print("Enter an expression: ");      try      {        switch (EG1.Sentence())        {          case 0 : System.out.println("Parser: Successful.");          //EG1.DoAction();
-          break;          case 1 : System.out.println("Empty expression, please enter a new one:");          break;          default : break;        }      }      catch (ParseException e)      {        System.out.println(e.getMessage());        System.out.println("Parser: Errors have been found.");        break;      }    }  }}//====================================================================================================================================
+import java.util.Iterator;public class EG1{  public static void main(String [] args) throws ParseException  {    EG1 parser = new EG1(System.in);
+    //prueba de metodos.........................
+    ObjectContainer oc= new ObjectContainer();
+    
+    //CREATE METHODS
+    //create object Prueba(atributo1,string);
+    oc.createNewObjectSingleParams("Prueba","atributo1","string");
+    //create object Objeto2(atri1,int,atri2,bool);
+    oc.createNewObjectBothParams("Objeto2","atri1","int","atri2","bool");
+    System.out.println(oc.selectAll()+"\n");
+
+    //SELECT METHODS
+    //Select prueba atributo1
+    System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
+    //Select objeto2 atri1,atri2
+    System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
+
+    //INSERT METHODS
+    oc.insertSingleObject("prueba","annadiendoatri");
+    oc.insertBothObject("Objeto2", "24","true");
+	//Select prueba atributo1
+    System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
+    //Select objeto2 atri1,atri2
+    System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
+        while (true)    {
+	
+            System.out.print("Live Happy :D \n");      System.out.print("Enter an expression: ");      try      {        switch (EG1.Sentence())        {          case 0 : System.out.println("Parser: Successful.");          
+          break;          case 1 : System.out.println("Empty expression, please enter a new one:");          break;          default : break;        }      }      catch (ParseException e)      {        System.out.println(e.getMessage());        System.out.println("Parser: Errors have been found.");        break;      }    }  }}//EG1.DoAction();//====================================================================================================================================
 //class object is like an template class
 class Object{  String objectName;
   String name[];//name of the object
@@ -126,20 +152,16 @@ class Object{  String objectName;
 	    if(name[0]!=null&&(type[0]=="int"||type[0]!=null))
 		{
 			sb.append(type[0]+" "+name[0]+"=");
-		    if(number[1]!=null)
-		    {
-		      sb.append(number[0]+"; ");
-		  	}else
-		    {
-		      sb.append("null; ");
-		    }
+		    try		    {		      
+		      sb.append(number[0]+"; ");		    }catch(Exception e)		    {		      sb.append("null; ");		  	}		  	
+		    
 	  }
 		if(name[1]!=null&&(type[1]=="int"||type[1]!=null))
 		{
 			sb.append(type[1]+" "+name[1]+"=");
-		    if(number[1]!=null)
+		    try
 		    {
-		      sb.append(number[1]+"; ");		  	}else
+		      sb.append(number[1]+"; ");		  	}catch(Exception e)
 		    {
 		      sb.append("null; ");
 		    }
@@ -148,10 +170,10 @@ class Object{  String objectName;
 		{
 		    sb.append(type[0]+" "+name[0]+"=");
 		  
-		    if(characters[0]!=null || !characters[0].isEmpty())
+		    try
 		    {
 		      sb.append(characters[0]+"; ");
-		    }else
+		    }catch(Exception e)
 		    {
 		      sb.append("null; ");
 		    }
@@ -162,39 +184,90 @@ class Object{  String objectName;
 		{
 		    sb.append(type[1]+" "+name[1]+"=");
 		  
-		    if(characters[1]!=null || !characters[1].isEmpty())
+		    try
 		    {
 		      sb.append(characters[1]+"; ");
-		    }else		    {
+		    }catch(Exception e)		    {
 		      sb.append("null; ");		    }	  }	  
 		if(name[0]!=null&&(type[0]=="boolean"||type[1]!=null))
 		{
 		  sb.append(type[0]+" "+name[0]+"=");
 		  
-			if(booleans[0]!=null)
+			try
 		    {
 		      sb.append(booleans[0]+"; ");
-		    }else
+		    }catch(Exception e)
 		    {
 		      sb.append("null; ");
 		    }	  	}	  
 	    
 		if(name[1]!=null&&(type[1]=="boolean"||type[1]!=null))		{		  sb.append("boolean "+name[1]+"=");
-			if(booleans[1]!=null)
+			try
 		    {
 		      sb.append(booleans[1]+"; ");
-		    }else		    {
+		    }catch(Exception e)		    {
 		      sb.append("null; ");		    }	  	}	  
     
-		return sb.toString();  }}//====================================================================================================================================
+		return sb.toString();  }
+
+  public boolean setSingleParameter(String value)  {
+    if(type[0]!=null)    {
+      try      {        
+	      if(type[0]=="int")	      {
+	        number[0]=Integer.parseInt(value);	      }else if(type[0]=="string")	      {
+	        characters[0]=value;	      }else if(type[0]=="bool")	      {
+	        booleans[0]=Boolean.parseBoolean(value);	      }
+	      return true;      }catch(Exception e)      {
+      		System.out.println("Wrong set of characters");       }        }
+    return false;  }
+  
+  public boolean setBothParameter(String value,String value2)
+	{
+	    if(type[0]!=null)
+	    {
+	      try
+	      {
+	        
+		      if(type[0]=="int")
+		      {
+		        number[0]=Integer.parseInt(value);
+		      }else if(type[0]=="string")
+		      {
+		        characters[0]=value;
+		      }else if(type[0]=="bool")
+		      {
+		        booleans[0]=Boolean.parseBoolean(value);
+		      }
+		      
+			  if(type[1]=="int")
+		      {
+		        number[1]=Integer.parseInt(value2);
+		      }else if(type[1]=="string")
+		      {
+		        characters[1]=value2;
+		      }else if(type[1]=="bool")
+		      {
+		        booleans[1]=Boolean.parseBoolean(value2);
+		      }
+		      return true;
+	      }catch(Exception e)
+	      {
+	      		System.out.println("Wrong set of characters"); 
+	      }
+	    
+	    }
+	    return false;
+    }
+  }//====================================================================================================================================
 //the Object container
 class ObjectContainer{  HashMap < String, Object > list;  public ObjectContainer()  {    list = new HashMap < String, Object > ();  }
 //*************************Select Methods*****************************************************************************  //this will print all the container
   public String selectAll()  {    StringBuilder sb = new StringBuilder();
 
-    Iterator iterator= list.keySet().iterator();
+    Iterator<String> iterator= list.keySet().iterator();
     while(iterator.hasNext())    {
       String key = (String)iterator.next();
+      
       Object value= list.get(key);
       sb.append(value.toString());    }       return sb.toString();  }
   //
@@ -206,7 +279,7 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
 	     sb.append("Name- "+o.getObjectName()+" ");
 	     if(o.getType()[0]=="int")	     {	      	sb.append(""+o.getNumber()[0]+"");	     }
 	     else if(o.getType()[0]=="string")	     {	       
-		 	sb.append(""+o.getNumber()[0]+"");		 }		 else if(o.getType()[0]=="bool")	     {
+		 	sb.append(""+o.getCharacters()[0]+"");		 }		 else if(o.getType()[0]=="bool")	     {
 	     	sb.append(""+o.getBooleans()[0]+""); 	     }         }else if(o.getName()[1]==parameter)
     {
 	     sb.append("Name- "+o.getObjectName()+" ");
@@ -227,16 +300,18 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
     }
     return sb.toString();  }
 	//Select both parameters
-  public String selectBothParameter(String objectName,String parameter,String Parameter2)
+  public String selectBothParameter(String objectName,String parameter,String parameter2)
   {
     StringBuilder sb = new StringBuilder();
     Object o= list.get(objectName);
-    sb.append("Name- "+o.getObjectName()+" ");
-    if(o.getName()[0]==parameter&&o.getName()[1]==parameter)
+    
+    if(o.getName()[0].equals(parameter)&&o.getName()[1].equals(parameter2))
     {
+    
 	     sb.append("Name- "+o.getObjectName()+" ");
 	     if(o.getType()[0]=="int")
 	     {
+	
 	      	sb.append(""+o.getNumber()[0]+"");
 	     }
 	     else if(o.getType()[0]=="string")
@@ -244,8 +319,9 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
 	       
 		 	sb.append(""+o.getNumber()[0]+"");
 		 }
-		 else if(o.getType()[0]=="bool")
+		 else if(o.getType()[0].equals("bool"))
 	     {
+	
 	     	sb.append(""+o.getBooleans()[0]+""); 
 	     }
 	     if(o.getType()[1]=="int")
@@ -302,12 +378,18 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
 //****************************************Insert********************************************************************
 
 public boolean insertSingleObject(String nameObject, String value){
-  
+  Object o=list.get(nameObject);
+  if(o!=null)  {
+    return list.get(nameObject).setSingleParameter(value);  }
   return false;}
 
-public boolean insertBothObject(String nameObject, String value,String Value2)
+public boolean insertBothObject(String nameObject, String value,String value2)
 {
-  
+  Object o=list.get(nameObject);
+  if(o!=null)
+  {
+    return list.get(nameObject).setBothParameter(value,value2);
+  }
   return false;
 }
 }PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* RESERVED WORDS */{  < create : "CREATE" >| < object : "OBJECT" >| < insert : "INSERT" >| < select : "SELECT" >| < from : "FROM" >}TOKEN :{  < TYPE :    "int"  | "bool"  | "string" >| < NUMBER : ([ "0"-"9" ])+ >| < IDENTIFIER : [ "a"-"z", "A"-"Z" ] ([ "a"-"z", "A"-"Z", "0"-"9", "_" ])* >| < STRING : [ "a"-"z", "A"-"Z", "0"-"9" ] ([ "a"-"z", "A"-"Z", "0"-"9" ])* >}TOKEN : /* SYMBOL */{  < INITSIMBOL : "(" >| < ENDSIMBOL : ")" >| < ENDLINE : ";" >| < COMMA : "," >}boolean DoAction() :{}{  Create()  {    return true;  }| Insert()  {    return true;  }  Select()  {    return true;  }| < ENDLINE >  {    return false;  }}int Sentence() :{}{  Create()  {    return 0;  }| Insert()  {    return 0;  }| Select()  {    return 0;  }| < ENDLINE >  {    return 1;  }}// When there is more than one parameter we must create more
