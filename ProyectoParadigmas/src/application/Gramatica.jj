@@ -8,24 +8,28 @@ import java.util.Iterator;public class EG1{  public static void main(String 
     //CREATE METHODS
     //create object Prueba(atributo1,string);
     oc.createNewObjectSingleParams("Prueba","atributo1","string");
+    oc.createNewObjectSingleParams("Enteros","x","int");
     //create object Objeto2(atri1,int,atri2,bool);
     oc.createNewObjectBothParams("Objeto2","atri1","int","atri2","bool");
-    System.out.println(oc.selectAll()+"\n");
+    
 
     //SELECT METHODS
     //Select prueba atributo1
     System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
+    
     //Select objeto2 atri1,atri2
     System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
 
     //INSERT METHODS
-    oc.insertSingleObject("prueba","annadiendoatri");
+    oc.insertSingleObject("Enteros","123");
+    oc.insertSingleObject("Prueba","annadiendoatri");
     oc.insertBothObject("Objeto2", "24","true");
+    System.out.println(oc.selectSingleParameter("Enteros","x")+"\n");
 	//Select prueba atributo1
     System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
     //Select objeto2 atri1,atri2
     System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
-        while (true)    {
+    while (true)    {
 	
             System.out.print("Live Happy :D \n");      System.out.print("Enter an expression: ");      try      {        switch (EG1.Sentence())        {          case 0 : System.out.println("Parser: Successful.");          
           break;          case 1 : System.out.println("Empty expression, please enter a new one:");          break;          default : break;        }      }      catch (ParseException e)      {        System.out.println(e.getMessage());        System.out.println("Parser: Errors have been found.");        break;      }    }  }}//EG1.DoAction();//====================================================================================================================================
@@ -146,69 +150,7 @@ class Object{  String objectName;
 	}
 	
   
-  public String toString()  {
-	    StringBuilder sb= new StringBuilder();
-	    sb.append("Name-"+objectName+" ");
-	    if(name[0]!=null&&(type[0]=="int"||type[0]!=null))
-		{
-			sb.append(type[0]+" "+name[0]+"=");
-		    try		    {		      
-		      sb.append(number[0]+"; ");		    }catch(Exception e)		    {		      sb.append("null; ");		  	}		  	
-		    
-	  }
-		if(name[1]!=null&&(type[1]=="int"||type[1]!=null))
-		{
-			sb.append(type[1]+" "+name[1]+"=");
-		    try
-		    {
-		      sb.append(number[1]+"; ");		  	}catch(Exception e)
-		    {
-		      sb.append("null; ");
-		    }
-	  }	  
-	    if(name[0]!=null&&(type[0]=="string"||type[0]!=null))
-		{
-		    sb.append(type[0]+" "+name[0]+"=");
-		  
-		    try
-		    {
-		      sb.append(characters[0]+"; ");
-		    }catch(Exception e)
-		    {
-		      sb.append("null; ");
-		    }
-	  }
-
-
-	    if(name[1]!=null&&(type[1]=="string"||type[1]!=null))
-		{
-		    sb.append(type[1]+" "+name[1]+"=");
-		  
-		    try
-		    {
-		      sb.append(characters[1]+"; ");
-		    }catch(Exception e)		    {
-		      sb.append("null; ");		    }	  }	  
-		if(name[0]!=null&&(type[0]=="boolean"||type[1]!=null))
-		{
-		  sb.append(type[0]+" "+name[0]+"=");
-		  
-			try
-		    {
-		      sb.append(booleans[0]+"; ");
-		    }catch(Exception e)
-		    {
-		      sb.append("null; ");
-		    }	  	}	  
-	    
-		if(name[1]!=null&&(type[1]=="boolean"||type[1]!=null))		{		  sb.append("boolean "+name[1]+"=");
-			try
-		    {
-		      sb.append(booleans[1]+"; ");
-		    }catch(Exception e)		    {
-		      sb.append("null; ");		    }	  	}	  
-    
-		return sb.toString();  }
+  
 
   public boolean setSingleParameter(String value)  {
     if(type[0]!=null)    {
@@ -261,20 +203,12 @@ class Object{  String objectName;
   }//====================================================================================================================================
 //the Object container
 class ObjectContainer{  HashMap < String, Object > list;  public ObjectContainer()  {    list = new HashMap < String, Object > ();  }
-//*************************Select Methods*****************************************************************************  //this will print all the container
-  public String selectAll()  {    StringBuilder sb = new StringBuilder();
-
-    Iterator<String> iterator= list.keySet().iterator();
-    while(iterator.hasNext())    {
-      String key = (String)iterator.next();
-      
-      Object value= list.get(key);
-      sb.append(value.toString());    }       return sb.toString();  }
+//*************************Select Methods*****************************************************************************  
   //
   public String selectSingleParameter(String objectName,String parameter)  {
     StringBuilder sb = new StringBuilder();
     Object o= list.get(objectName);
-    sb.append("Name- "+o.getObjectName()+" ");
+    
     if(o.getName()[0]==parameter)    {
 	     sb.append("Name- "+o.getObjectName()+" ");
 	     if(o.getType()[0]=="int")	     {	      	sb.append(""+o.getNumber()[0]+"");	     }
