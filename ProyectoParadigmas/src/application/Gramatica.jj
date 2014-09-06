@@ -1,40 +1,19 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
  */options{  JDK_VERSION = "1.8";  static = true;  COMMON_TOKEN_ACTION = false;  TOKEN_MANAGER_USES_PARSER = true;}PARSER_BEGIN(EG1)package application;import java.util.HashMap;import java.lang.StringBuilder;
-import java.util.Iterator;public class EG1{  public static void main(String [] args) throws ParseException  {    EG1 parser = new EG1(System.in);
-    //prueba de metodos.........................
-    ObjectContainer oc= new ObjectContainer();
+import java.util.Iterator;public class EG1{
+  static ObjectContainer oc;  public static void main(String [] args) throws ParseException  {
+        EG1 parser = new EG1(System.in);
     
-    //CREATE METHODS
-    //create object Prueba(atributo1,string);
-    oc.createNewObjectSingleParams("Prueba","atributo1","string");
-    oc.createNewObjectSingleParams("Enteros","x","int");
-    //create object Objeto2(atri1,int,atri2,bool);
-    oc.createNewObjectBothParams("Objeto2","atri1","int","atri2","bool");
+    oc= new ObjectContainer();
     
-
-    //SELECT METHODS
-    //Select prueba atributo1
-    System.out.println(oc.selectSingleParameter("prueba","atributo1")+"\n");
     
-    //Select objeto2 atri1,atri2
-    System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
-
-    //INSERT METHODS
-    oc.insertSingleObject("Enteros","123");
-    oc.insertSingleObject("prueba","annadiendoatri");
-    oc.insertBothObject("Objeto2", "24","true");
-    System.out.println(oc.selectSingleParameter("Enteros","x")+"\n");
-	//Select prueba atributo1
-    System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
-    //Select objeto2 atri1,atri2
-    System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
 
     
     while (true)    {
 	
             System.out.print("Live Happy :D \n");      System.out.print("Enter an expression: ");      try      {        switch (EG1.Sentence())        {          case 0 : System.out.println("Parser: Successful.");          
-          break;          case 1 : System.out.println("Empty expression, please enter a new one:");          break;          default : break;        }      }      catch (ParseException e)      {        System.out.println(e.getMessage());        System.out.println("Parser: Errors have been found.");        break;      }    }  }}//EG1.DoAction();//====================================================================================================================================
+          break;          case 1 : System.out.println("Empty expression, please enter a new one:");          break;          default : break;        }      }      catch (ParseException e)      {        System.out.println(e.getMessage());        System.out.println("Parser: Errors have been found.");        break;      }    }  }}//====================================================================================================================================
 //class object is like an template class
 class Object{  String objectName;
   String name[];//name of the object
@@ -85,22 +64,22 @@ class Object{  String objectName;
     		this.name[1]=value2;
     		this.type[1]=type2;
     		//and then inicialize the variables who the object will need.
-			  if(type1=="int")			  {
+			  if(type1.equals("int"))			  {
 			    number = new Integer [2];
-			     			  }else if(type1=="string"){
+			     			  }else if(type1.equals("string")){
 			    
-			  	characters = new String [2];			  			  }else if(type1=="bool"){
+			  	characters = new String [2];			  			  }else if(type1.equals("bool")){
 			    
 			    booleans = new Boolean [2];			  }
-			  if(type2=="int")
+			  if(type2.equals("int"))
 			  {
 			    
 			    number = new Integer [2];
 			    
-			  }else if(type2=="string"){
+			  }else if(type2.equals("string")){
 			  	characters = new String [2];
 			  
-			  }else if(type2=="bool"){
+			  }else if(type2.equals("bool")){
 			    booleans = new Boolean [2];
 			  }
 			  		}catch(Exception e)		{
@@ -172,24 +151,24 @@ class Object{  String objectName;
 	      try
 	      {
 	        
-		      if(type[0]=="int")
+		      if(type[0].equals("int"))
 		      {
 		        number[0]=Integer.parseInt(value);
-		      }else if(type[0]=="string")
+		      }else if(type[0].equals("string"))
 		      {
 		        characters[0]=value;
-		      }else if(type[0]=="bool")
+		      }else if(type[0].equals("bool"))
 		      {
 		        booleans[0]=Boolean.parseBoolean(value);
 		      }
 		      
-			  if(type[1]=="int")
+			  if(type[1].equals("int"))
 		      {
 		        number[1]=Integer.parseInt(value2);
-		      }else if(type[1]=="string")
+		      }else if(type[1].equals("string"))
 		      {
 		        characters[1]=value2;
-		      }else if(type[1]=="bool")
+		      }else if(type[1].equals("bool"))
 		      {
 		        booleans[1]=Boolean.parseBoolean(value2);
 		      }
@@ -211,11 +190,11 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
     StringBuilder sb = new StringBuilder();
     Object o= list.get(objectName);
 	if(o!=null){  
-	    if(o.getName()[0]==parameter)	    {
+	    if(o.getName()[0]==parameter){
 		     sb.append("Name- "+o.getObjectName()+" ");
-		     if(o.getType()[0]=="int")		     {		      	sb.append(""+o.getNumber()[0]+"");		     }
-		     else if(o.getType()[0]=="string")		     {		       
-			 	sb.append(""+o.getCharacters()[0]+"");			 }			 else if(o.getType()[0]=="bool")		     {
+		     if(o.getType()[0].equals("int"))		     {		      	sb.append(""+o.getNumber()[0]+"");		     }
+		     else if(o.getType()[0].equals("string"))		     {		       
+			 	sb.append(""+o.getCharacters()[0]+"");			 }			 else if(o.getType()[0].equals("bool"))		     {
 		     	sb.append(""+o.getBooleans()[0]+""); 		     }	     	    }else if(o.getName()[1]==parameter)
 	    {
 		     sb.append("Name- "+o.getObjectName()+" ");
@@ -245,34 +224,35 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
 	    if(o.getName()[0].equals(parameter)&&o.getName()[1].equals(parameter2))
 	    {
 	    
-		     sb.append("Name- "+o.getObjectName()+" ");
-		     if(o.getType()[0]=="int")
+		     sb.append("Object name: "+o.getObjectName()+" ");
+		     String tipo=o.getType()[0];
+		     if(tipo.equals("int"))
 		     {
 		
-		      	sb.append(""+o.getNumber()[0]+"");
+		      	sb.append(" "+o.getNumber()[0]+" ");
 		     }
-		     else if(o.getType()[0]=="string")
+		     else if(o.getType()[0].equals("string"))
 		     {
 		       
-			 	sb.append(""+o.getNumber()[0]+"");
+			 	sb.append(" "+o.getCharacters()[0]+" ");
 			 }
 			 else if(o.getType()[0].equals("bool"))
 		     {
 		
-		     	sb.append(""+o.getBooleans()[0]+""); 
+		     	sb.append(" "+o.getBooleans()[0]+" "); 
 		     }
-		     if(o.getType()[1]=="int")
+		     if(o.getType()[1].equals("int"))
 		     {
-		      	sb.append(""+o.getNumber()[1]+"");
+		      	sb.append(" "+o.getNumber()[1]+" ");
 		     }
-		     else if(o.getType()[1]=="string")
+		     else if(o.getType()[1].equals("string"))
 		     {
 		       
-			 	sb.append(""+o.getNumber()[1]+"");
+			 	sb.append(" "+o.getCharacters()[1]+" ");
 			 }
-			 else if(o.getType()[1]=="bool")
+			 else if(o.getType()[1].equals("bool"))
 		     {
-		     	sb.append(""+o.getBooleans()[1]+""); 
+		     	sb.append(" "+o.getBooleans()[1]+" "); 
 		     }
 	    }
     }else{
@@ -286,13 +266,13 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
   //************************************************************************
 
   //*****************CREATE*************************************************  //this will create a new object with 2 parameter and insert it, on the list.
-	public boolean createNewObjectBothParams(String nameObject,String sentence, String type,String sentence2,String type2)	{
-	  		try	  		{
+	public boolean createNewObjectBothParams(String nameObject,String sentence, String type,String sentence2,String type2)	{	if(!list.containsKey(nameObject))		{	  	   try		   {
 				Object newObject = new Object(nameObject,sentence,type,sentence2,type2);
-		  		list.put(nameObject,newObject);
-		  		return true;
-	  }catch(Exception e)	  {
-	    System.out.println("Error to create new object...");	  }		return false;	}
+				list.put(nameObject,newObject);
+			  	return true;
+		   }catch(Exception e)		   {
+		     System.out.println("Error to create new object...");		   }		 }else		 {
+		   System.out.println("The object already exist");		 }		 		return false;	}
 
 	
 	//this will create a new object with 1 parameter and insert it, on the list.
@@ -331,9 +311,16 @@ public void insertBothObject(String nameObject, String value,String value2)
   }catch(Exception e){
     System.out.println("The object:"+nameObject+" dont exist..");  }
 }
-}PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* RESERVED WORDS */{  < create : "CREATE" >| < object : "OBJECT" >| < insert : "INSERT" >| < select : "SELECT" >| < from : "FROM" >}TOKEN :{  < TYPE :    "int"  | "bool"  | "string" >| < NUMBER : ([ "0"-"9" ])+ >| < IDENTIFIER : [ "a"-"z", "A"-"Z" ] ([ "a"-"z", "A"-"Z", "0"-"9", "_" ])* >| < STRING : [ "a"-"z", "A"-"Z", "0"-"9" ] ([ "a"-"z", "A"-"Z", "0"-"9" ])* >}TOKEN : /* SYMBOL */{  < INITSIMBOL : "(" >| < ENDSIMBOL : ")" >| < ENDLINE : ";" >| < COMMA : "," >}boolean DoAction() :{}{  Create()  {    return true;  }| Insert()  {    return true;  }  Select()  {    return true;  }| < ENDLINE >  {    return false;  }}int Sentence() :{}{  Create()  {    return 0;  }| Insert()  {    return 0;  }| Select()  {    return 0;  }| < ENDLINE >  {    return 1;  }}// When there is more than one parameter we must create more
+}PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* RESERVED WORDS */{  < create : "CREATE" >| < object : "OBJECT" >| < insert : "INSERT" >| < select : "SELECT" >| < from : "FROM" >}TOKEN :{  < TYPE :    "int"  | "bool"  | "string" >| < NUMBER : ([ "0"-"9" ])+ >| < IDENTIFIER : [ "a"-"z", "A"-"Z" ] ([ "a"-"z", "A"-"Z", "0"-"9", "_" ])* >| < STRING : [ "a"-"z", "A"-"Z", "0"-"9" ] ([ "a"-"z", "A"-"Z", "0"-"9" ])* >}TOKEN : /* SYMBOL */{  < INITSIMBOL : "(" >| < ENDSIMBOL : ")" >| < ENDLINE : ";" >| < COMMA : "," >}int Sentence() :{}{  Create()  {    return 0;  }| Insert()  {    return 0;  }| Select()  {    return 0;  }| < ENDLINE >  {    return 1;  }}// When there is more than one parameter we must create more
 // branches in order to create the syntax
-void Create() :{}{  BeginCreate() oneParamameter() EndCreate()  {}}void BeginCreate() :{}{  < create > < object > < IDENTIFIER > < INITSIMBOL >}void EndCreate() :{}{  < ENDSIMBOL > < ENDLINE >| < COMMA > Parameters() finalCreate()}// FinalCreate works as a break cuz if it does not exist
+void Create() :{Token objectName, parameter1,type1,parameter2,type2;}{
+  < create > < object > (objectName=< IDENTIFIER >) < INITSIMBOL > ((parameter1=< IDENTIFIER >) (type1=< TYPE >) < COMMA > (parameter2=< IDENTIFIER >) (type2=< TYPE >))(< ENDSIMBOL > < ENDLINE >)  /*BeginCreate() oneParamameter() EndCreate()*/  {oc.createNewObjectBothParams(objectName.image , parameter1.image,type1.image,parameter2.image,type2.image);}}void BeginCreate() :{Token t;}{  < create > < object > (t=< IDENTIFIER >) < INITSIMBOL > 
+  {
+    System.out.println("Hola "+t.image);  }}void EndCreate() :{}{  < ENDSIMBOL > < ENDLINE >| < COMMA > Parameters() finalCreate()}// FinalCreate works as a break cuz if it does not exist
 // we could get a loop in witch will be admit more than two parameters
-void finalCreate() :{}{  < ENDSIMBOL > < ENDLINE >}void Insert() :{}{  < insert > < IDENTIFIER > < INITSIMBOL > ParamameterValue() < COMMA > ParamameterValue() < ENDSIMBOL > < ENDLINE >}void Select() :{}{  < select > < IDENTIFIER > < COMMA > < IDENTIFIER > < from > < IDENTIFIER > < ENDLINE >}void Parameters() :{}{  oneParamameter()  //globalDeclaration() | Principal()
-}void oneParamameter() :{}{  < IDENTIFIER > < TYPE >}void ParamameterValue() :{}{  < IDENTIFIER >|< NUMBER >}void twoParamameters() :{}{  < IDENTIFIER > < TYPE > < IDENTIFIER > < TYPE >}
+void finalCreate() :{}{  < ENDSIMBOL > < ENDLINE >}void Insert() :{Token parameter1,parameter2,objectName;}{  < insert > (objectName=< IDENTIFIER >) < INITSIMBOL > ((parameter1=< IDENTIFIER >)|(parameter1=< NUMBER >)) < COMMA > ((parameter2=< IDENTIFIER >)|(parameter2=< NUMBER >)) < ENDSIMBOL > < ENDLINE >
+  {
+    oc.insertBothObject(objectName.image,parameter1.image,parameter2.image);  }}void Select() :{Token parameter1,parameter2,objectName;}{  < select > (parameter1=< IDENTIFIER >) < COMMA > (parameter2=< IDENTIFIER >) < from > (objectName=< IDENTIFIER >) < ENDLINE >
+  {
+    System.out.println(oc.selectBothParameter(objectName.image,parameter1.image,parameter2.image));  }}void Parameters() :{}{  oneParamameter()  
+}void oneParamameter() :{}{  < IDENTIFIER > < TYPE >}void twoParamameters() :{}{  < IDENTIFIER > < TYPE > < IDENTIFIER > < TYPE >}
