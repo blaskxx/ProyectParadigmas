@@ -317,7 +317,7 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
 //****************************************Insert********************************************************************
 
 public void insertSingleObject(String nameObject, String value){
-  Object o=list.get(nameObject);
+  
   try  {
      list.get(nameObject).setSingleParameter(value);  }catch(Exception e)  {
     System.out.println("The object:"+nameObject+" dont exist..");  }
@@ -325,7 +325,7 @@ public void insertSingleObject(String nameObject, String value){
 
 public void insertBothObject(String nameObject, String value,String value2)
 {
-  Object o=list.get(nameObject);
+  
   try{
     list.get(nameObject).setBothParameter(value,value2);
   }catch(Exception e){
