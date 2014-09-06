@@ -15,20 +15,22 @@ import java.util.Iterator;public class EG1{  public static void main(String 
 
     //SELECT METHODS
     //Select prueba atributo1
-    System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
+    System.out.println(oc.selectSingleParameter("prueba","atributo1")+"\n");
     
     //Select objeto2 atri1,atri2
     System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
 
     //INSERT METHODS
     oc.insertSingleObject("Enteros","123");
-    oc.insertSingleObject("Prueba","annadiendoatri");
+    oc.insertSingleObject("prueba","annadiendoatri");
     oc.insertBothObject("Objeto2", "24","true");
     System.out.println(oc.selectSingleParameter("Enteros","x")+"\n");
 	//Select prueba atributo1
     System.out.println(oc.selectSingleParameter("Prueba","atributo1")+"\n");
     //Select objeto2 atri1,atri2
     System.out.println(oc.selectBothParameter("Objeto2","atri1","atri2")+"\n");
+
+    
     while (true)    {
 	
             System.out.print("Live Happy :D \n");      System.out.print("Enter an expression: ");      try      {        switch (EG1.Sentence())        {          case 0 : System.out.println("Parser: Successful.");          
@@ -208,71 +210,74 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
   public String selectSingleParameter(String objectName,String parameter)  {
     StringBuilder sb = new StringBuilder();
     Object o= list.get(objectName);
-    
-    if(o.getName()[0]==parameter)    {
-	     sb.append("Name- "+o.getObjectName()+" ");
-	     if(o.getType()[0]=="int")	     {	      	sb.append(""+o.getNumber()[0]+"");	     }
-	     else if(o.getType()[0]=="string")	     {	       
-		 	sb.append(""+o.getCharacters()[0]+"");		 }		 else if(o.getType()[0]=="bool")	     {
-	     	sb.append(""+o.getBooleans()[0]+""); 	     }         }else if(o.getName()[1]==parameter)
-    {
-	     sb.append("Name- "+o.getObjectName()+" ");
-	     if(o.getType()[1]=="int")
-	     {
-	      	sb.append(""+o.getNumber()[1]+"");
-	     }
-	     else if(o.getType()[1]=="string")
-	     {
-	       
-		 	sb.append(""+o.getNumber()[1]+"");
-		 }
-		 else if(o.getType()[1]=="bool")
-	     {
-	     	sb.append(""+o.getBooleans()[1]+""); 
-	     }
+	if(o!=null){  
+	    if(o.getName()[0]==parameter)	    {
+		     sb.append("Name- "+o.getObjectName()+" ");
+		     if(o.getType()[0]=="int")		     {		      	sb.append(""+o.getNumber()[0]+"");		     }
+		     else if(o.getType()[0]=="string")		     {		       
+			 	sb.append(""+o.getCharacters()[0]+"");			 }			 else if(o.getType()[0]=="bool")		     {
+		     	sb.append(""+o.getBooleans()[0]+""); 		     }	     	    }else if(o.getName()[1]==parameter)
+	    {
+		     sb.append("Name- "+o.getObjectName()+" ");
+		     if(o.getType()[1]=="int")
+		     {
+		      	sb.append(""+o.getNumber()[1]+"");
+		     }
+		     else if(o.getType()[1]=="string")
+		     {
+		       
+			 	sb.append(""+o.getNumber()[1]+"");
+			 }
+			 else if(o.getType()[1]=="bool")
+		     {
+		     	sb.append(""+o.getBooleans()[1]+""); 
+		     }
      
-    }
+        }    }else{
+      sb.append("The object:"+objectName+" dont exist..");    }  
     return sb.toString();  }
 	//Select both parameters
   public String selectBothParameter(String objectName,String parameter,String parameter2)
   {
     StringBuilder sb = new StringBuilder();
     Object o= list.get(objectName);
-    
-    if(o.getName()[0].equals(parameter)&&o.getName()[1].equals(parameter2))
-    {
-    
-	     sb.append("Name- "+o.getObjectName()+" ");
-	     if(o.getType()[0]=="int")
-	     {
-	
-	      	sb.append(""+o.getNumber()[0]+"");
-	     }
-	     else if(o.getType()[0]=="string")
-	     {
-	       
-		 	sb.append(""+o.getNumber()[0]+"");
-		 }
-		 else if(o.getType()[0].equals("bool"))
-	     {
-	
-	     	sb.append(""+o.getBooleans()[0]+""); 
-	     }
-	     if(o.getType()[1]=="int")
-	     {
-	      	sb.append(""+o.getNumber()[1]+"");
-	     }
-	     else if(o.getType()[1]=="string")
-	     {
-	       
-		 	sb.append(""+o.getNumber()[1]+"");
-		 }
-		 else if(o.getType()[1]=="bool")
-	     {
-	     	sb.append(""+o.getBooleans()[1]+""); 
-	     }
+    if(o!=null){
+	    if(o.getName()[0].equals(parameter)&&o.getName()[1].equals(parameter2))
+	    {
+	    
+		     sb.append("Name- "+o.getObjectName()+" ");
+		     if(o.getType()[0]=="int")
+		     {
+		
+		      	sb.append(""+o.getNumber()[0]+"");
+		     }
+		     else if(o.getType()[0]=="string")
+		     {
+		       
+			 	sb.append(""+o.getNumber()[0]+"");
+			 }
+			 else if(o.getType()[0].equals("bool"))
+		     {
+		
+		     	sb.append(""+o.getBooleans()[0]+""); 
+		     }
+		     if(o.getType()[1]=="int")
+		     {
+		      	sb.append(""+o.getNumber()[1]+"");
+		     }
+		     else if(o.getType()[1]=="string")
+		     {
+		       
+			 	sb.append(""+o.getNumber()[1]+"");
+			 }
+			 else if(o.getType()[1]=="bool")
+		     {
+		     	sb.append(""+o.getBooleans()[1]+""); 
+		     }
+	    }
+    }else{
+      sb.append("The object:"+objectName+" dont exist..");
     }
-    
     return sb.toString();
     
   }
@@ -311,20 +316,20 @@ class ObjectContainer{  HashMap < String, Object > list;  public ObjectConta
 
 //****************************************Insert********************************************************************
 
-public boolean insertSingleObject(String nameObject, String value){
+public void insertSingleObject(String nameObject, String value){
   Object o=list.get(nameObject);
-  if(o!=null)  {
-    return list.get(nameObject).setSingleParameter(value);  }
-  return false;}
+  try  {
+     list.get(nameObject).setSingleParameter(value);  }catch(Exception e)  {
+    System.out.println("The object:"+nameObject+" dont exist..");  }
+  }
 
-public boolean insertBothObject(String nameObject, String value,String value2)
+public void insertBothObject(String nameObject, String value,String value2)
 {
   Object o=list.get(nameObject);
-  if(o!=null)
-  {
-    return list.get(nameObject).setBothParameter(value,value2);
-  }
-  return false;
+  try{
+    list.get(nameObject).setBothParameter(value,value2);
+  }catch(Exception e){
+    System.out.println("The object:"+nameObject+" dont exist..");  }
 }
 }PARSER_END(EG1)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* RESERVED WORDS */{  < create : "CREATE" >| < object : "OBJECT" >| < insert : "INSERT" >| < select : "SELECT" >| < from : "FROM" >}TOKEN :{  < TYPE :    "int"  | "bool"  | "string" >| < NUMBER : ([ "0"-"9" ])+ >| < IDENTIFIER : [ "a"-"z", "A"-"Z" ] ([ "a"-"z", "A"-"Z", "0"-"9", "_" ])* >| < STRING : [ "a"-"z", "A"-"Z", "0"-"9" ] ([ "a"-"z", "A"-"Z", "0"-"9" ])* >}TOKEN : /* SYMBOL */{  < INITSIMBOL : "(" >| < ENDSIMBOL : ")" >| < ENDLINE : ";" >| < COMMA : "," >}boolean DoAction() :{}{  Create()  {    return true;  }| Insert()  {    return true;  }  Select()  {    return true;  }| < ENDLINE >  {    return false;  }}int Sentence() :{}{  Create()  {    return 0;  }| Insert()  {    return 0;  }| Select()  {    return 0;  }| < ENDLINE >  {    return 1;  }}// When there is more than one parameter we must create more
 // branches in order to create the syntax
