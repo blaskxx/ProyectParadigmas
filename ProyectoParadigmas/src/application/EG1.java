@@ -22,13 +22,15 @@ public class EG1 implements EG1Constants {
     {
 
 
-      System.out.print("Live Happy :D \u005cn");
+     
       System.out.print("Enter an expression: ");
+      
       try
       {
         switch (EG1.Sentence())
         {
           case 0 : System.out.println("Parser: Successful.");
+          			
 
           break;
           case 1 : System.out.println("Empty expression, please enter a new one:");
@@ -605,7 +607,6 @@ class ObjectContainer
   {
     list = new HashMap < String, Object > ();
   }
-
 //*************************Select Methods*****************************************************************************
   //
   public String selectSingleParameter(String objectName,String parameter)
